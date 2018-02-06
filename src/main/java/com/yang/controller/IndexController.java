@@ -12,7 +12,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(ModelMap map) {
-        System.out.println(1);
         map.addAttribute("host", "http://blog.didispace.com");
         return "index";
     }
