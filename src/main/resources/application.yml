@@ -1,0 +1,20 @@
+#tomcat
+server:
+  context-path: /rdms
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+
+#log4j2
+logging:
+  config: classpath:log4j2-dev.xml
+
+#spring encode
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8

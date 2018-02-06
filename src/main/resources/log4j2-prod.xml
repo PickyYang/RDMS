@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <properties>
+        <!-- 文件输出格式 -->
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} |-%-5level [%thread] %c [%L] -| %msg%n</property>
+    </properties>
+
+    <appenders>
+        <!-- 控制台输出 -->
+        <Console name="CONSOLE" target="system_out">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+        <!-- 文件输出debug -->
+        <RollingFile name="DEBUG_ROLLING_FILE" fileName="D:\\yang-log\\logs.log"
+                     filePattern="D:\\yang-log\\%d{yyyy-mm-dd}-debugs.log">
+            <PatternLayout pattern="${PATTERN}"/>
+            <!-- 文件截断条件 -->
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24"/>
+                <SizeBasedTriggeringPolicy size="250MB"/>
+            </Policies>
+        </RollingFile>
+        <!-- 文件输出error -->
+        <RollingFile name="ERROR_ROLLING_FILE" fileName="D:\\yang-log\\error.log"
+                     filePattern="D:\\yang-log\\%d{yyyy-mm-dd}-error.log">
+            <PatternLayout pattern="${PATTERN}"/>
+            <!-- 可以通过该参数来设置获取日志的权限 -->
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!-- 文件截断条件 -->
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24"/>
+                <SizeBasedTriggeringPolicy size="250MB"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+
+    <loggers>
+        <logger name="com.roncoo.education" level="debug"/>
+        <root level="info">
+            <appenderref ref="CONSOLE"/>
+            <AppenderRef ref="DEBUG_ROLLING_FILE"/>
+            <AppenderRef ref="ERROR_ROLLING_FILE"/>
+        </root>
+    </loggers>
+
+</configuration>
